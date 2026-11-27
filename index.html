@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feito pra você</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Palco fixo: as imagens ficam aqui e trocam conforme o scroll -->
+  <div class="palco" aria-hidden="true">
+    <div class="moldura">
+      <!--
+        COMO COLOCAR SUAS IMAGENS:
+        1) coloque os arquivos na pasta "imagens"
+        2) troque o src de cada <img> abaixo (ex.: imagens/gatos.jpg)
+        Enquanto não existir a imagem, aparece um quadro colorido no lugar.
+      -->
+      <img class="foto ativa" data-cor="#f2c6b4" data-nome="Imagem 1" src="imagens/1.jpg" alt="">
+      <img class="foto" data-cor="#b9d6c2" data-nome="Imagem 2" src="imagens/2.jpg" alt="">
+      <img class="foto" data-cor="#c8c3e8" data-nome="Imagem 3" src="imagens/3.jpg" alt="">
+      <img class="foto" data-cor="#f3dd9e" data-nome="Imagem 4" src="imagens/4.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 5" src="imagens/5.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 6" src="imagens/6.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 7" src="imagens/7.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 8" src="imagens/8.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 9" src="imagens/9.jpg" alt="">
+      <img class="foto" data-cor="#a8d3e6" data-nome="Imagem 10" src="imagens/10.jpg" alt="">
+    </div>
+    <div class="pontos"></div>
+  </div>
+
+  <main class="textos">
+
+    <!-- Abertura (usa a imagem 1) -->
+    <section class="bloco" data-foto="0">
+      <h1>Pra você .dll</h1>
+      <p>Ma boy check da strim</p>
+    </section>
+
+    <!-- Cada <section> troca a imagem de índice data-foto -->
+    <section class="bloco" data-foto="1">
+      <h2>Morango Hmmmmm</h2>
+      <p>Pera. Era essa mesmo ?</p>
+    </section>
+
+    <section class="bloco" data-foto="2">
+      <h2>Quem não gosta de ler um bom livro</h2>
+      <p>Já comprou esse ?</p>
+    </section>
+
+    <section class="bloco" data-foto="3">
+      <h2>Se eu for jogar dvd vou terq usar</h2>
+      <p>Mas eu n tenho o jogo </p>
+    </section>
+
+    <section class="bloco" data-foto="4">
+      <h2>Morango Hmmmmmm</h2>
+      <p>Não, pera...</p>
+    </section>
+
+    <section class="bloco" data-foto="5">
+      <h2>:x</h2>
+      <p>:x</p>
+    </section>
+
+    <section class="bloco" data-foto="6">
+      <h2>Rock pesado tocando até agr </h2>
+      <p>VAMOOOOOOOOOOOOOOO</p>
+    </section>
+
+    <section class="bloco" data-foto="7">
+      <h2>Não conheço mas deve ser esse aqui né</h2>
+      <p>.</p>
+    </section>
+
+    <section class="bloco" data-foto="8">
+      <h2>Eu ia por uma foto sua mas não achei uma q tu ta sombria</h2>
+      <p>:\</p>
+    </section>
+
+    <section class="bloco" data-foto="9">
+      <h2>UMBREON >>>>>>>>>>>>>>>>></h2>
+      <p>Pãozin tava gostoso</p>
+    </section>
+
+  </main>
+
+  <!--
+    MÚSICA DE FUNDO:
+    coloque o arquivo na pasta "musica" e troque o nome abaixo (mp3 funciona em todo navegador)
+  -->
+  <audio id="musica" src="musica/elemsm.mp3" loop preload="auto"></audio>
+  <button class="som" id="botaoSom" type="button" aria-label="Tocar música" aria-pressed="false">
+    <svg class="icone-tocar" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="3"/><circle cx="17.5" cy="16" r="3"/></svg>
+    <svg class="icone-mudo" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="3" fill="currentColor"/><circle cx="17.5" cy="16" r="3" fill="currentColor"/><path d="M3 3l18 18"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

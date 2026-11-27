@@ -1,0 +1,166 @@
+:root {
+  --texto: #b90000;
+  --suave: rgba(4, 190, 214, 0.85);
+  --fundo-foto: #f2c6b4; /* muda sozinho com a foto */
+  --altura-bloco: 160vh; /* quanto maior, mais devagar a imagem desce */
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: var(--texto);
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+/* ---------- Fundo (imagens em tela cheia) ---------- */
+.palco {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--fundo-foto);
+  transition: background .8s ease;
+}
+
+.moldura {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* A foto tem a largura da tela e a altura que for; o JS faz ela descer conforme o scroll */
+.foto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity .9s ease;
+}
+.foto.saindo { opacity: 1; z-index: 1; }
+.foto.ativa  { opacity: 1; z-index: 2; }
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.placeholder.saindo { opacity: 1; z-index: 1; }
+.placeholder.ativa  { opacity: 1; z-index: 2; }
+
+/* Quadro mostrado enquanto a imagem não existe */
+.placeholder {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: rgba(43, 35, 32, .55);
+  background: var(--cor);
+}
+
+/* Escurece um pouco a foto para o texto ficar legível */
+.palco::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(20, 14, 12, .65) 0%, rgba(20, 14, 12, .25) 55%, rgba(20, 14, 12, .05) 100%);
+  pointer-events: none;
+}
+
+.pontos {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  gap: .6rem;
+  z-index: 1;
+}
+.ponto {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 250, 243, .4);
+  transition: background .3s, scale .3s;
+}
+.ponto.ativo { background: #fff; scale: 1.5; }
+
+/* ---------- Textos por cima ---------- */
+.textos {
+  position: relative;
+  z-index: 1;
+  padding: 0 clamp(1.5rem, 7vw, 6rem);
+}
+
+.bloco {
+  min-height: var(--altura-bloco);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 34rem;
+  opacity: .2;
+  transition: opacity .6s ease;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .35);
+}
+.bloco.ativo { opacity: 1; }
+
+h1, h2 {
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 1.2rem;
+}
+h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.6rem); }
+p  { font-size: 1.15rem; color: var(--suave); max-width: 30rem; }
+
+/* ---------- Celular: escurece mais embaixo ---------- */
+@media (max-width: 800px) {
+  .palco::after {
+    background: linear-gradient(180deg, rgba(20, 14, 12, .2) 0%, rgba(20, 14, 12, .7) 100%);
+  }
+  .bloco { justify-content: center; }
+  .pontos { right: .8rem; }
+}
+
+.som {
+  position: fixed;
+  left: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 243, .5);
+  border-radius: 50%;
+  background: rgba(20, 14, 12, .45);
+  color: #fffaf3;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background .2s, scale .2s;
+}
+.som:hover { background: rgba(20, 14, 12, .7); scale: 1.06; }
+.som:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.som .icone-mudo { display: none; }
+.som[aria-pressed="false"] .icone-tocar { display: none; }
+.som[aria-pressed="false"] .icone-mudo { display: block; }
+.som[aria-pressed="true"] { animation: pulsar 2.4s ease-in-out infinite; }
+@keyframes pulsar {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 250, 243, .35); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 250, 243, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
